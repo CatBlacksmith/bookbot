@@ -6,7 +6,8 @@ def main():
 def print_report(text, path):
     print(f"--Begin report of {path}--")
     print(f"{get_word_count(text)} words found in text.")
-    print(sort_by_num(text))
+    for char in sort_by_num(text):
+        print(f"The '{char["char"]}' character was found {char["count"]} times.")
 
 
 def sort_by_num(text):
@@ -14,8 +15,9 @@ def sort_by_num(text):
     new_list = []
     for char in chars:
         if char.isalpha():
-            new_list.append({char: chars[char]})
-    return sorted(new_list, key=lambda d: d[0])
+            new_list.append({"char": char, "count": chars[char]})
+    new_list.sort(reverse=True, key=lambda d:d["count"])
+    return new_list
     
 
 
